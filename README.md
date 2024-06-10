@@ -1,5 +1,3 @@
-[DOCUMENTATIONS FOR THE ENDPOINTS ON POSTMAN](https://documenter.getpostman.com/view/16649553/2sA3XLEPhS)
-
 # DEEL BACKEND TASK
 
 💫 Welcome! 🎉
@@ -98,5 +96,3 @@ It would be great for example if you'd write some unit test / simple frontend de
 When you have finished the assignment, zip your repo (make sure to include .git folder) and send us the zip.
 
 Thank you and good luck! 🙏
-
-[DOCUMENTATIONS FOR THE ENDPOINTS ON POSTMAN](https://documenter.getpostman.com/view/16649553/2sA3XLEPhS)
