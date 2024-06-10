@@ -28,64 +28,83 @@ describe("Profile Endpoints", () => {
   afterAll(() => {
     jest.restoreAllMocks();
   });
-  // describe("POST /api/v1/balances/deposit/:userId", () => {
-  //   fit("should deposit money into client's account", async () => {
-  //     model.Profile.findOne.mockImplementationOnce(() =>
-  //       Promise.resolve({
-  //         id: 1,
-  //         type: "client",
-  //         balance: 100.0,
-  //       })
-  //     );
+  describe("POST /api/v1/balances/deposit/:userId", () => {
+    it("should deposit money into client's account", async () => {
+      model.Profile.findOne.mockImplementationOnce(() =>
+        Promise.resolve({
+          id: 1,
+          type: "client",
+          balance: 100.0,
+        })
+      );
 
-  //     model.Profile.findOne.mockResolvedValue({
-  //       id: 1,
-  //       type: "client",
-  //       balance: 100.0,
-  //     });
+      model.Profile.findOne.mockResolvedValue({
+        id: 1,
+        type: "client",
+        balance: 100.0,
+        save: jest.fn().mockResolvedValue(true),
+      });
 
-  //     model.Job.sum.mockResolvedValue(400.0);
+      model.Job.sum.mockResolvedValue(400.0);
 
-  //     const response = await request(app)
-  //       .post("/api/v1/balances/deposit/1")
-  //       .send({ amount: 50.0 })
-  //       .set("profile_id", 1);
+      const response = await request(app)
+        .post("/api/v1/balances/deposit/1")
+        .send({ amount: 50.0 })
+        .set("profile_id", 1);
 
-  //     console.log("response ==== \n", response.body);
+      expect(response.status).toBe(201);
+      expect(response.body).toEqual({
+        message: "Deposit successful",
+        data: { balance: "150.00" },
+      });
+    });
 
-  //     expect(response.status).toBe(201);
-  //     expect(response.body).toEqual({
-  //       message: "Deposit successful",
-  //       data: { balance: "150.00" },
-  //     });
-  //   });
-  //   it("should return 404 if client not found", async () => {
-  //     profileRepo.findOne.mockResolvedValue(null);
-  //     const response = await request(app)
-  //       .post("/api/v1/balances/deposit/1")
-  //       .send({ amount: 50.0 })
-  //       .set("profile_id", 1);
-  //     expect(response.status).toBe(404);
-  //     expect(response.body).toEqual({ error: "Client not found" });
-  //   });
-  //   it("should return 400 if deposit amount exceeds allowed limit", async () => {
-  //     profileRepo.findOne.mockResolvedValue({
-  //       id: 1,
-  //       type: "client",
-  //       balance: 100.0,
-  //       save: jest.fn().mockResolvedValue(true),
-  //     });
-  //     profileRepo.getTotalUnpaidJobs.mockResolvedValue(400.0);
-  //     const response = await request(app)
-  //       .post("/api/v1/balances/deposit/1")
-  //       .send({ amount: 150.0 })
-  //       .set("profile_id", 1);
-  //     expect(response.status).toBe(400);
-  //     expect(response.body).toEqual({
-  //       error: "Deposit amount exceeds the allowed limit of 100.00",
-  //     });
-  //   });
-  // });
+    it("should return 404 if client not found", async () => {
+      model.Profile.findOne.mockImplementationOnce(() =>
+        Promise.resolve({
+          id: 1,
+          type: "client",
+          balance: 100.0,
+        })
+      );
+
+      model.Profile.findOne.mockResolvedValue(null);
+
+      const response = await request(app)
+        .post("/api/v1/balances/deposit/1")
+        .send({ amount: 50.0 })
+        .set("profile_id", 1);
+      expect(response.status).toBe(404);
+      expect(response.body).toEqual({ error: "Client not found" });
+    });
+
+    it("should return 400 if deposit amount exceeds allowed limit", async () => {
+      model.Profile.findOne.mockResolvedValue({
+        id: 1,
+        type: "client",
+        balance: 100.0,
+      });
+
+      model.Profile.findOne.mockResolvedValue({
+        id: 1,
+        type: "client",
+        balance: 100.0,
+        save: jest.fn().mockResolvedValue(true),
+      });
+
+      model.Job.sum.mockResolvedValue(400.0);
+
+      const response = await request(app)
+        .post("/api/v1/balances/deposit/1")
+        .send({ amount: 500.0 })
+        .set("profile_id", 1);
+
+      expect(response.status).toBe(400);
+      expect(response.body).toEqual({
+        error: "Deposit amount exceeds the allowed limit of 100.00",
+      });
+    });
+  });
 
   describe("GET /api/v1/admin/best-profession", () => {
     it("should return the best contractor profession", async () => {
