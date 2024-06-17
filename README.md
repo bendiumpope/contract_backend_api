@@ -1,8 +1,8 @@
-# DEEL BACKEND TASK
+# CONTRACT BACKEND API
 
 💫 Welcome! 🎉
 
-This backend exercise involves building a Node.js/Express.js app that will serve a REST API. We imagine you should spend around 3 hours at implement this feature.
+This involves building a Node.js/Express.js app that will serve a REST API. It show cases the use of transactions in sequelize ORM with SQLite.
 
 ## Data Models
 
@@ -26,7 +26,7 @@ contractor get paid for jobs by clients under a certain contract.
 
 ## Getting Set Up
 
-The exercise requires [Node.js](https://nodejs.org/en/) to be installed. We recommend using the LTS version.
+The requires [Node.js](https://nodejs.org/en/) to be installed. We recommend using the LTS version.
 
 1. Start by creating a local repository for this folder.
 
@@ -51,7 +51,7 @@ The exercise requires [Node.js](https://nodejs.org/en/) to be installed. We reco
 
 Below is a list of the required API's for the application.
 
-1. **_GET_** `/contracts/:id` - This API is broken 😵! it should return the contract only if it belongs to the profile calling. better fix that!
+1. **_GET_** `/contracts/:id` - This API returns the contract only if it belongs to the profile calling. better fix that!
 
 1. **_GET_** `/contracts` - Returns a list of contracts belonging to a user (client or contractor), the list should only contain non terminated contracts.
 
@@ -84,15 +84,3 @@ Below is a list of the required API's for the application.
     }
 ]
 ```
-
-## Going Above and Beyond the Requirements
-
-Given the time expectations of this exercise, we don't expect anyone to submit anything super fancy, but if you find yourself with extra time, any extra credit item(s) that showcase your unique strengths would be awesome! 🙌
-
-It would be great for example if you'd write some unit test / simple frontend demostrating calls to your fresh APIs.
-
-## Submitting the Assignment
-
-When you have finished the assignment, zip your repo (make sure to include .git folder) and send us the zip.
-
-Thank you and good luck! 🙏
