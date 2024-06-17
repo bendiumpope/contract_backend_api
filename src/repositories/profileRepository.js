@@ -19,9 +19,7 @@ class ProfileRepository extends BaseRepository {
         model: Contract,
         where: {
           ClientId: clientId,
-          status: {
-            [Op.ne]: "terminated",
-          },
+          status: "in_progress",
         },
       },
       where: {

@@ -14,9 +14,7 @@ class JobRepository extends BaseRepository {
         model: Contract,
         where: {
           [Op.or]: [{ ContractorId: profileId }, { ClientId: profileId }],
-          status: {
-            [Op.ne]: "terminated",
-          },
+          status: "in_progress",
         },
       },
       where: {
@@ -34,9 +32,7 @@ class JobRepository extends BaseRepository {
       include: {
         model: Contract,
         where: {
-          status: {
-            [Op.ne]: "terminated",
-          },
+          status: "in_progress",
         },
         include: [
           { model: Profile, as: "Client" },
