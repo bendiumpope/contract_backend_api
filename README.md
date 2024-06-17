@@ -26,7 +26,7 @@ contractor get paid for jobs by clients under a certain contract.
 
 ## Getting Set Up
 
-The requires [Node.js](https://nodejs.org/en/) to be installed. We recommend using the LTS version.
+These requires [Node.js](https://nodejs.org/en/) to be installed. We recommend using the LTS version.
 
 1. Start by creating a local repository for this folder.
 
@@ -47,9 +47,9 @@ The requires [Node.js](https://nodejs.org/en/) to be installed. We recommend usi
 - To authenticate users use the `getProfile` middleware that is located under src/middleware/getProfile.js. users are authenticated by passing `profile_id` in the request header. after a user is authenticated his profile will be available under `req.profile`. make sure only users that are on the contract can access their contracts.
 - The server is running on port 3001.
 
-## APIs To Implement
+## APIs
 
-Below is a list of the required API's for the application.
+Below is a list of the API's for these application.
 
 1. **_GET_** `/contracts/:id` - This API returns the contract only if it belongs to the profile calling. better fix that!
 
